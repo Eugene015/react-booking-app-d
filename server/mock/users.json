@@ -1,0 +1,20 @@
+[
+  {
+    "id": 2111111,
+    "name": "Alex",
+    "email": "alex@alex.com",
+    "password": "",
+    "image": "",
+    "phone": "+380503393322",
+    "isAdmin": false
+  },
+  {
+    "id": 2111112,
+    "name": "Glory",
+    "email": "glr@glory.com",
+    "password": "",
+    "image": "",
+    "phone": "+380503393310",
+    "isAdmin": false
+  }
+]
