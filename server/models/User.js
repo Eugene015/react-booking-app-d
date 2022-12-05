@@ -4,7 +4,7 @@ const schema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+
       unique: true,
     },
     email: {
@@ -16,7 +16,6 @@ const schema = new Schema(
     image: String,
     phone: {
       type: String,
-      required: true,
     },
     isAdmin: {
       type: Boolean,
