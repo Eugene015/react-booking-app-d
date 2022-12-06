@@ -2,13 +2,19 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
-const router = express.Router({ mergeParams: true });
 const { generateUserData } = require("../utils/helpers");
 const tokenService = require("../services/token.service");
+const router = express.Router({ mergeParams: true });
 
+// /api/auth/signUp
+// 1. get data from req (email, password ...)
+// 2. check if users already exists
+// 3. hash password
+// 4. create user
+// 5. generate tokens
 router.post("/signUp", [
-  check("email", "Incorrect email").isEmail(),
-  check("password", "Min length is 8 symbols!").isLength({ min: 8 }),
+  check("email", "Некорректный email").isEmail(),
+  check("password", "Минимальная длина пароля 8 символов").isLength({ min: 8 }),
   async (req, res) => {
     try {
       const errors = validationResult(req);
@@ -17,14 +23,16 @@ router.post("/signUp", [
           error: {
             message: "INVALID_DATA",
             code: 400,
-            errors: errors.array(),
+            // errors: errors.array()
           },
         });
       }
 
       const { email, password } = req.body;
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
+
+      const exitingUser = await User.findOne({ email });
+
+      if (exitingUser) {
         return res.status(400).json({
           error: {
             message: "EMAIL_EXISTS",
@@ -46,14 +54,21 @@ router.post("/signUp", [
 
       res.status(201).send({ ...tokens, userId: newUser._id });
     } catch (e) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({
+        message: "На сервере произошла ошибка. Попробуйте позже",
+      });
     }
   },
 ]);
-router.post("/signInWithPassword", [
-  check("email", "IncoRRect email").normalizeEmail().isEmail(),
-  check("password", "Password can not be empty").exists(),
 
+// 1. validate
+// 2. find user
+// 3. compare hashed password
+// 4. generate token
+// 5. return data
+router.post("/signInWithPassword", [
+  check("email", "Email некорректный").normalizeEmail().isEmail(),
+  check("password", "Пароль не может быть пустым").exists(),
   async (req, res) => {
     try {
       const errors = validationResult(req);
@@ -67,7 +82,9 @@ router.post("/signInWithPassword", [
       }
 
       const { email, password } = req.body;
+
       const existingUser = await User.findOne({ email });
+
       if (!existingUser) {
         return res.status(400).send({
           error: {
@@ -96,7 +113,9 @@ router.post("/signInWithPassword", [
 
       res.status(200).send({ ...tokens, userId: existingUser._id });
     } catch (e) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({
+        message: "На сервере произошла ошибка. Попробуйте позже",
+      });
     }
   },
 ]);
@@ -116,13 +135,16 @@ router.post("/token", async (req, res) => {
     }
 
     const tokens = await tokenService.generate({
-      id: data._id,
+      _id: data._id,
     });
     await tokenService.save(data._id, tokens.refreshToken);
 
     res.status(200).send({ ...tokens, userId: data._id });
   } catch (e) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({
+      message: "На сервере произошла ошибка. Попробуйте позже",
+    });
   }
 });
+
 module.exports = router;
