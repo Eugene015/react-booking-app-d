@@ -1,6 +1,6 @@
 import React from "react";
 
-const SelectsCard = ({ bg, text, category, seaview, halfboard, price }) => {
+const RoomCard = ({ bg, text, category, seaview, halfboard, price }) => {
   const handleClick = ({ target }) => {
     return console.log("clicked", target);
   };
@@ -29,11 +29,11 @@ const SelectsCard = ({ bg, text, category, seaview, halfboard, price }) => {
           <span className="text-lg font-bold pt-6">Price</span>: {price}
         </p>
         <button className="mt-6 mb-2" onClick={handleClick}>
-          Read more
+          Book Now
         </button>
       </div>
     </div>
   );
 };
 
-export default SelectsCard;
+export default RoomCard;

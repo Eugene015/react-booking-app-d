@@ -1,10 +1,11 @@
 import React from "react";
-import SelectsCard from "./SelectsCard";
+import RoomCard from "./RoomCard";
 import { useRooms } from "../hooks/useRooms";
 import { ThreeDots } from "react-loader-spinner";
 
-const Selects = () => {
+const RoomsList = () => {
   const { rooms } = useRooms();
+  console.log(rooms);
 
   return (
     <>
@@ -18,8 +19,8 @@ const Selects = () => {
       <div className="max-w-[1240px] mx-auto px-4 pt-8 pb-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
         {rooms ? (
           rooms.map((room) => (
-            <SelectsCard
-              key={room.id}
+            <RoomCard
+              key={room._id}
               bg={room.imgUrl}
               text={room.category}
               category={room.category}
@@ -47,4 +48,4 @@ const Selects = () => {
   );
 };
 
-export default Selects;
+export default RoomsList;

@@ -19,6 +19,7 @@ const RoomsProvider = ({ children }) => {
       setError(null);
     }
   }, [error]);
+
   async function getRooms() {
     try {
       const { content } = await roomsService.get();
