@@ -1,8 +1,10 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
-const RoomCard = ({ bg, text, category, seaview, halfboard, price }) => {
-  const handleClick = ({ target }) => {
-    return console.log("clicked", target);
+const RoomCard = ({ _id, bg, text, category, seaview, halfboard, price }) => {
+  const history = useHistory();
+  const handleClick = (_id) => {
+    history.push(`/roomsPage/${_id}`);
   };
 
   return (
@@ -28,7 +30,7 @@ const RoomCard = ({ bg, text, category, seaview, halfboard, price }) => {
         <p>
           <span className="text-lg font-bold pt-6">Price</span>: {price}
         </p>
-        <button className="mt-6 mb-2" onClick={handleClick}>
+        <button className="mt-6 mb-2" onClick={() => handleClick(_id)}>
           Book Now
         </button>
       </div>

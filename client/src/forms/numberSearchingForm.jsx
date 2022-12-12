@@ -10,9 +10,9 @@ const NumberSearchingForm = () => {
       <div className="md:flex my-2 outline-none">
         <label>Number category</label>
         <select className="border rounded-md p-2">
-          <option>Luxury Suit</option>
-          <option>Family</option>
-          <option>Standard</option>
+          <option selected>Standard</option>
+          <option value="Luxury Suit">Luxury Suit</option>
+          <option value="Family">Family</option>
         </select>
       </div>
       <div className="md:flex my-2">

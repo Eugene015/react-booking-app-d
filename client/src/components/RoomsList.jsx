@@ -21,6 +21,7 @@ const RoomsList = () => {
           rooms.map((room) => (
             <RoomCard
               key={room._id}
+              _id={room._id}
               bg={room.imgUrl}
               text={room.category}
               category={room.category}

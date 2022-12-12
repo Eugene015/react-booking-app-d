@@ -1,6 +1,7 @@
 import React from "react";
 import mhotel_hero from "../assets/mhotel_hero.jpg";
 import NumberSearchingForm from "../forms/numberSearchingForm";
+import SearchBar from "./ui/searchBar";
 
 const Hero = () => {
   return (
@@ -16,8 +17,8 @@ const Hero = () => {
           <span className="text-orange-300">5 Star</span> hotel on Meditteranian
           seashore
         </h1>
-        <h2 className="font-normal pt-3 pb-8">Top 3 in Liguria</h2>
-        <NumberSearchingForm />
+        <h2 className="font-normal">Top 3 in Liguria</h2>
+        <SearchBar />
       </div>
     </div>
   );

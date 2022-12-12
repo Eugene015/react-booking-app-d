@@ -17,7 +17,7 @@ function App() {
           <ProtectedRoute path="/users/:userId?/:edit?" component={UserPage} />
           <Route path="/login/:type?" component={Login} />
           <Route path="/logout" component={LogOut} />
-          <Route path="/roomsPage/:roomId" component={RoomPage} />
+          <Route path="/roomsPage/:roomId?" component={RoomPage} />
           <Route path="/" exact component={MainPage} />
           <Redirect to="/" />
         </Switch>
