@@ -10,7 +10,7 @@ const RoomsList = () => {
   return (
     <>
       <div id="numbers" className="text-center pt-16 ">
-        <h1>Our beautiful numbers</h1>
+        <h1>Our beautiful numbers availiable for now</h1>
         <p className="py-4">
           All the numbers are clean and cozy and have all the necessary stuff
           for your pleasant vacation

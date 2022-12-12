@@ -1,23 +1,25 @@
 import React from "react";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
-import { useSelector } from "react-redux";
-import { getUsersList } from "../store/users";
+import { useParams } from "react-router-dom";
+import { useRooms } from "../hooks/useRooms";
 
 const RoomPage = () => {
-  const users = useSelector(getUsersList());
-  console.log(users);
+  const { roomId } = useParams();
+  const { rooms } = useRooms();
+  const { imgUrl } = rooms.find((r) => r._id === roomId);
+  console.log(imgUrl);
+
+  // 1. Get room by Id
 
   return (
     <>
-      <Navbar />
-      <div className="w-full h-screen relative bg-gradient-to-r from-cyan-500 to-blue-500">
-        <div className="absolute top-0 w-full h-full flex flex-col justify-center text-center text-white p-4">
-          <h1>RoomPage</h1>
+      <h1>Room Page</h1>
+      {!rooms ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div>
+          <img src={imgUrl} alt="Hotel Room" />
         </div>
-      </div>
-
-      <Footer />
+      )}
     </>
   );
 };
