@@ -39,9 +39,8 @@ const SearchBar = () => {
     });
   };
 
-  const handleSearch = () => {
-    console.log({ category, dates, options });
-    history.push("/roomsPage", { state: { category, dates, options } });
+  const handleSearch = (searchData) => {
+    history.push("/roomsPage", searchData);
   };
 
   return (
@@ -49,14 +48,13 @@ const SearchBar = () => {
       <div className="headerSearchItem">
         <FontAwesomeIcon icon={faBed} className="headerIcon" />
         <select
-          type=""
-          placeholder="Room category"
           className="headerSearchInput"
+          defaultValue="standard"
           onChange={(e) => setCategory(e.target.value)}
         >
-          <option defaultValue="Standard">Standard</option>
-          <option value="Luxury Suit">Luxury Suit</option>
-          <option value="Family">Family</option>
+          <option value="standard">Standard</option>
+          <option value="luxury">Luxury Suit</option>
+          <option value="family">Family</option>
         </select>
       </div>
       <div className="headerSearchItem">
@@ -148,8 +146,11 @@ const SearchBar = () => {
         )}
       </div>
       <div className="headerSearchItem">
-        <button className="headerBtn" onClick={handleSearch}>
-          Search
+        <button
+          className="headerBtn"
+          onClick={() => handleSearch({ category, dates, options })}
+        >
+          Check availiability
         </button>
       </div>
     </div>

@@ -6,17 +6,28 @@ import {
   getUsersLoadingStatus,
   loadUsersList,
 } from "../../store/users";
+import {
+  getIsLoggedInForRooms,
+  getRoomsLoadingStatus,
+  loadRoomsList,
+} from "../../store/rooms";
 
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(getIsLoggedIn());
   const usersStatusLoading = useSelector(getUsersLoadingStatus());
+
+  const isLoggedInForRooms = useSelector(getIsLoggedInForRooms());
+  const roomsLoadingStatus = useSelector(getRoomsLoadingStatus());
+
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && isLoggedInForRooms) {
       dispatch(loadUsersList());
+      dispatch(loadRoomsList());
     }
-  }, [isLoggedIn]);
-  if (usersStatusLoading) return "loading";
+  }, [isLoggedIn, isLoggedInForRooms]);
+
+  if (usersStatusLoading && roomsLoadingStatus) return "loading";
   return children;
 };
 

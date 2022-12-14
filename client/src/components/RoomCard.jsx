@@ -1,7 +1,14 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useHistory } from "react-router-dom";
+import {
+  faUtensils,
+  faWater,
+  faSlash,
+} from "@fortawesome/free-solid-svg-icons";
 
 const RoomCard = ({ _id, bg, text, category, seaview, halfboard, price }) => {
+  console.log(seaview);
   const history = useHistory();
   const handleClick = (_id) => {
     history.push(`/roomsPage/${_id}`);
@@ -22,16 +29,22 @@ const RoomCard = ({ _id, bg, text, category, seaview, halfboard, price }) => {
           <span className="font-bold">Category</span>: {category}
         </p>
         <p>
-          <span className="font-bold">Seaview</span>: {seaview}
+          <span className="font-bold">Seaview</span>:{" "}
+          {seaview ? <FontAwesomeIcon icon={faWater} /> : ""}
         </p>
         <p>
-          <span className="font-bold">Halfboard</span>: {halfboard}
+          <span className="font-bold">Halfboard</span>:{" "}
+          {halfboard ? (
+            <FontAwesomeIcon icon={faUtensils} />
+          ) : (
+            <FontAwesomeIcon icon={faSlash} />
+          )}
         </p>
         <p>
           <span className="text-lg font-bold pt-6">Price</span>: {price}
         </p>
         <button className="mt-6 mb-2" onClick={() => handleClick(_id)}>
-          Book Now
+          Look and Book
         </button>
       </div>
     </div>

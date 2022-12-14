@@ -1,6 +1,5 @@
 import React from "react";
 import mhotel_hero from "../assets/mhotel_hero.jpg";
-import NumberSearchingForm from "../forms/numberSearchingForm";
 import SearchBar from "./ui/searchBar";
 
 const Hero = () => {

@@ -21,11 +21,13 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex w-full justify-between items-center h-20 px-4 absolute z-10 text-white">
+      <div className="flex w-full justify-between items-center h-20 px-4 absolute z-10 text-white bg-slate-600 bg-opacity-50">
         <div>
-          <h1 onClick={handleNav} className={logo ? "hidden" : "block"}>
-            MEDITERRANIAN<span className="font-extralight">hotel</span>
-          </h1>
+          <Link to="/">
+            <h1 onClick={handleNav} className={logo ? "hidden" : "block"}>
+              MEDITERRANIAN<span className="font-extralight">hotel</span>
+            </h1>
+          </Link>
         </div>
         <ul className="hidden md:flex">
           <li>

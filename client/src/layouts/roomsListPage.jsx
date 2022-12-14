@@ -1,14 +1,9 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { useSelector } from "react-redux";
-import { getUsersList } from "../store/users";
 import RoomsList from "../components/RoomsList";
 
 const RoomsListPage = () => {
-  const users = useSelector(getUsersList());
-  console.log(users);
-
   return (
     <>
       <Navbar />
