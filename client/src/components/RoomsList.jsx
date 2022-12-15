@@ -34,16 +34,17 @@ const RoomsList = () => {
                   seaview={room.seaView}
                   halfboard={room.halfBoard}
                   price={room.price}
+                  searchData={state}
                 />
               )
           )
         ) : (
-          <div className="text-center pt-16">
+          <div className="w-[80px] mx-auto pt-16">
             <ThreeDots
               height="80"
               width="80"
               radius="9"
-              color="#1f07d9"
+              color="#5651e5"
               ariaLabel="three-dots-loading"
               wrapperStyle={{}}
               wrapperClassName=""

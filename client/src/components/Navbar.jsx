@@ -10,10 +10,16 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getIsLoggedIn } from "../store/users";
+import NavProfile from "./ui/navProfile";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const [logo, setLogo] = useState(false);
+
+  const isLoggedIn = useSelector(getIsLoggedIn());
+
   const handleNav = () => {
     setNav(!nav);
     setLogo(!logo);
@@ -38,11 +44,14 @@ const Navbar = () => {
 
           <li>Contacts</li>
         </ul>
-        <div className="hidden md:flex">
-          <BsPerson size={22} />
-          <Link to="/login">
-            <span className="font-extralight">Sign up/Sign In</span>
-          </Link>
+        <div className="hidden md:flex lg:flex sm:flex">
+          {isLoggedIn ? (
+            <NavProfile />
+          ) : (
+            <Link to="/login/login">
+              <BsPerson size={22} /> Sign In/Sign Up
+            </Link>
+          )}
         </div>
 
         {/* Hamburger */}
@@ -71,7 +80,9 @@ const Navbar = () => {
             <li className="border-b">Our Numbers</li>
             <li className="border-b">Contacts</li>
             <div className="flex flex-col">
-              <button className="my-6">Sign up/Sign In</button>
+              <button className="my-6">
+                {isLoggedIn ? <NavProfile /> : <Link to="/login">Login</Link>}
+              </button>
             </div>
             <div className="flex justify-between my-6">
               <FaFacebook className="icon" />

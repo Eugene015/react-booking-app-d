@@ -62,9 +62,9 @@ const SearchBar = () => {
         <span
           onClick={() => setOpenDate(!openDate)}
           className="headerSearchText"
-        >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
+        >{`${format(dates[0].startDate, "dd/MM/yyyy")} to ${format(
           dates[0].endDate,
-          "MM/dd/yyyy"
+          "dd/MM/yyyy"
         )}`}</span>
         {openDate && (
           <DateRange

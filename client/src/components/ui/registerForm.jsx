@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
-import SelectField from "../common/form/selectField";
-import RadioField from "../common/form/radio.Field";
-import MultiSelectField from "../common/form/multiSelectField";
 import CheckBoxField from "../common/form/checkBoxField";
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/users";
@@ -28,7 +25,7 @@ const RegisterForm = () => {
       [target.name]: target.value,
     }));
   };
-  const validatorConfog = {
+  const validatorConfig = {
     email: {
       isRequired: {
         message: "Электронная почта обязательна для заполнения",
@@ -77,7 +74,7 @@ const RegisterForm = () => {
     validate();
   }, [data]);
   const validate = () => {
-    const errors = validator(data, validatorConfog);
+    const errors = validator(data, validatorConfig);
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -95,71 +92,69 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        label="Электронная почта"
-        name="email"
-        value={data.email}
-        onChange={handleChange}
-        error={errors.email}
-      />
-      <TextField
-        label="Имя"
-        name="name"
-        value={data.name}
-        onChange={handleChange}
-        error={errors.name}
-      />
-      <TextField
-        label="Пароль"
-        type="password"
-        name="password"
-        value={data.password}
-        onChange={handleChange}
-        error={errors.password}
-      />
-      <SelectField
-        label="Выбери свою профессию"
-        defaultOption="Choose..."
-        name="profession"
-        options={"professionsList"}
-        onChange={handleChange}
-        value={data.profession}
-        error={errors.profession}
-      />
-      <RadioField
-        options={[
-          { name: "Male", value: "male" },
-          { name: "Female", value: "female" },
-          { name: "Other", value: "other" },
-        ]}
-        value={data.sex}
-        name="sex"
-        onChange={handleChange}
-        label="Выберите ваш пол"
-      />
-      <MultiSelectField
-        options={"qualitiesList"}
-        onChange={handleChange}
-        name="qualities"
-        label="Выберите ваши качесвта"
-      />
-      <CheckBoxField
-        value={data.licence}
-        onChange={handleChange}
-        name="licence"
-        error={errors.licence}
+    <div className="w-full max-w-xs m-auto">
+      <form
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        onSubmit={handleSubmit}
       >
-        Подтвердить <a>лицензионное соглашение</a>
-      </CheckBoxField>
-      <button
-        type="submit"
-        disabled={!isValid}
-        className="btn btn-primary w-100 mx-auto"
-      >
-        Submit
-      </button>
-    </form>
+        <TextField
+          label="Имя"
+          name="name"
+          value={data.name}
+          onChange={handleChange}
+          error={errors.name}
+        />
+        <TextField
+          label="Электронная почта"
+          name="email"
+          value={data.email}
+          onChange={handleChange}
+          error={errors.email}
+        />
+
+        <TextField
+          label="Пароль"
+          type="password"
+          name="password"
+          value={data.password}
+          onChange={handleChange}
+          error={errors.password}
+        />
+
+        <div>
+          <label
+            htmlFor="phone"
+            className="block msb-2 text-sm font-medium text-gray-900"
+          >
+            Phone number
+          </label>
+          <input
+            type="tel"
+            name="phone"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="+38063-111-22-33"
+            pattern="+[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+            required
+          />
+        </div>
+
+        <CheckBoxField
+          value={data.licence}
+          onChange={handleChange}
+          name="licence"
+          error={errors.licence}
+        >
+          Подтвердить <a>лицензионное соглашение</a>
+        </CheckBoxField>
+        <button
+          type="submit"
+          disabled={!isValid}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
   );
 };
 

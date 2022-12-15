@@ -32,7 +32,7 @@ const LoginForm = () => {
     },
     password: {
       isRequired: {
-        message: "Пароль обязателкн для заполнения",
+        message: "Пароль обязателен для заполнения",
       },
     },
   };

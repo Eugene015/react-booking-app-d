@@ -7,11 +7,20 @@ import {
   faSlash,
 } from "@fortawesome/free-solid-svg-icons";
 
-const RoomCard = ({ _id, bg, text, category, seaview, halfboard, price }) => {
-  console.log(seaview);
+const RoomCard = ({
+  _id,
+  bg,
+  text,
+  category,
+  seaview,
+  halfboard,
+  price,
+  searchData,
+}) => {
+  console.log(searchData);
   const history = useHistory();
   const handleClick = (_id) => {
-    history.push(`/roomsPage/${_id}`);
+    history.push(`/roomsPage/${_id}`, searchData);
   };
 
   return (
