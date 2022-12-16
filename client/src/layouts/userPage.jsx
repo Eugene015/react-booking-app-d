@@ -80,7 +80,7 @@ const UserPage = () => {
                     <td className="py-4 px-6 text-orange-500">
                       ${state ? state.totalPrice : ""}
                     </td>
-                    <td class="py-4 px-6">
+                    <td className="py-4 px-6">
                       <a
                         href="#"
                         className="font-medium text-blue-600 dark:text-blue-500 hover:underline"

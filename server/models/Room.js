@@ -28,7 +28,7 @@ const schema = new Schema(
       type: Number,
       required: true,
     },
-    roomNumbers: [{ number: Number, unavailableDates: { type: [Date] } }],
+    unavailableDates: [Date],
   },
   {
     timestamps: true,

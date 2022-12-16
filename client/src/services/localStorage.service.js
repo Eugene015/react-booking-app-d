@@ -2,6 +2,7 @@ const TOKEN_KEY = "jwt-token";
 const REFRESH_KEY = "jwt-refresh-token";
 const EXPIRES_KEY = "jwt-expires";
 const USERID_KEY = "user-local-id";
+const ROOMID_KEY = "room-local-id";
 
 export function setTokens({
   refreshToken,
@@ -34,12 +35,22 @@ export function getTokenExpiresDate() {
 export function getUserId() {
   return localStorage.getItem(USERID_KEY);
 }
+
+export function setRoomId(roomId) {
+  return localStorage.setItem(ROOMID_KEY, roomId);
+}
+
+export function getRoomId() {
+  return localStorage.getItem(ROOMID_KEY);
+}
+
 const localStorageService = {
   setTokens,
   getAccessToken,
   getRefreshToken,
   getTokenExpiresDate,
   getUserId,
+  setRoomId,
   removeAuthData,
 };
 export default localStorageService;

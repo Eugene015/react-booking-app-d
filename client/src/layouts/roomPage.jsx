@@ -13,6 +13,7 @@ import {
 import localStorageService from "../services/localStorage.service";
 import { getCurrentUserData } from "../store/users";
 import { dayDifference } from "../utils/dayDiff";
+import { getDatesInRange } from "../utils/datesInRange";
 
 const RoomPage = () => {
   const { state } = useLocation();
@@ -30,20 +31,27 @@ const RoomPage = () => {
   const bookingMessage =
     "Congrats! You have successfully booked your room. This room will not be available for other guests on your booking dates. You could manage your bookings on your profile page.";
 
-  const totalDays = dayDifference(
+  const totalNights = dayDifference(
     state.dates[0].startDate,
     state.dates[0].endDate
   );
 
-  console.log(totalDays);
+  console.log(totalNights);
 
-  const totalPrice = totalDays * room.price;
+  const totalPrice = totalNights * room.price;
+
+  const allDates = getDatesInRange(
+    state.dates[0].startDate,
+    state.dates[0].endDate
+  );
+
+  console.log(allDates);
 
   const handleClick = () => {
     if (!localStorageService.getAccessToken()) {
       history.push(`/login/login`);
     }
-
+    localStorageService.setRoomId(roomId);
     return history.push(`/users/${currentUser._id}`, {
       message: bookingMessage,
       totalPrice,
@@ -109,7 +117,7 @@ const RoomPage = () => {
                 <div>
                   <p className="mb-2 font-bold">Total</p>
                   <p>
-                    <span className="text-xs">Days</span> {totalDays} |{" "}
+                    <span className="text-xs">Nights</span> {totalNights} |{" "}
                     <span className="text-xs">Price</span> ${totalPrice}
                   </p>
                 </div>

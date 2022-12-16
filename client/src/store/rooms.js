@@ -25,11 +25,24 @@ const roomsSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
     },
+    roomsUnavDaysAdded: (state, action) => {
+      console.log(action.payload);
+    },
+    roomsUnavDaysAddedFiled: (state, action) => {
+      state.error = action.payload;
+      state.isLoading = false;
+    },
   },
 });
 
 const { reducer: roomsReducer, actions } = roomsSlice;
-const { roomsRequested, roomsReceived, roomsRequestFiled } = actions;
+const {
+  roomsRequested,
+  roomsReceived,
+  roomsRequestFiled,
+  roomsUnavDaysAdded,
+  roomsUnavDaysAddedFiled,
+} = actions;
 
 export const loadRoomsList = () => async (dispatch) => {
   dispatch(roomsRequested());
@@ -39,6 +52,15 @@ export const loadRoomsList = () => async (dispatch) => {
     dispatch(roomsReceived(content));
   } catch (error) {
     dispatch(roomsRequestFiled(error.message));
+  }
+};
+
+export const unavailableDatesAdd = (payload) => async (dispatch) => {
+  try {
+    const { content } = await roomsService.update(payload);
+    dispatch(roomsUnavDaysAdded(content));
+  } catch (error) {
+    dispatch(roomsUnavDaysAddedFiled(error.message));
   }
 };
 
