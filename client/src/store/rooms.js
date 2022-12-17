@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import roomsService from "../services/rooms.service";
 
 const initialState = {
@@ -26,7 +26,10 @@ const roomsSlice = createSlice({
       state.isLoading = false;
     },
     roomsUnavDaysAdded: (state, action) => {
-      console.log(action.payload);
+      const index = state.entities.findIndex(
+        (room) => room._id === action.payload._id
+      );
+      state.entities.splice(index, 1, action.payload);
     },
     roomsUnavDaysAddedFiled: (state, action) => {
       state.error = action.payload;
@@ -57,8 +60,10 @@ export const loadRoomsList = () => async (dispatch) => {
 
 export const unavailableDatesAdd = (payload) => async (dispatch) => {
   try {
-    const { content } = await roomsService.update(payload);
-    dispatch(roomsUnavDaysAdded(content));
+    console.log(payload);
+    // const { content } = await roomsService.update(payload);
+    // console.log(content);
+    dispatch(roomsUnavDaysAdded(payload));
   } catch (error) {
     dispatch(roomsUnavDaysAddedFiled(error.message));
   }

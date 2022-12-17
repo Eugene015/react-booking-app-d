@@ -13,7 +13,8 @@ router.get("/", async (req, res) => {
 
 router.patch("/:roomId", async (req, res) => {
   try {
-    const { roomId } = req.params;
+    // const { roomId } = req.params;
+    console.log(req.params);
 
     if (userId === req.user._id) {
       const updatedUser = await User.findByIdAndUpdate(userId, req.body, {

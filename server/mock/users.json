@@ -1,20 +1,10 @@
 [
   {
-    "id": 2111111,
-    "name": "Alex",
-    "email": "alex@alex.com",
-    "password": "",
-    "image": "",
-    "phone": "+380503393322",
-    "isAdmin": false
-  },
-  {
-    "id": 2111112,
-    "name": "Glory",
-    "email": "glr@glory.com",
-    "password": "",
-    "image": "",
-    "phone": "+380503393310",
+    "_id": "639df4a74f23335df779c4f3",
+    "name": "Bob Bobov",
+    "email": "a123@gmail.com",
+    "password": "$2a$12$H7Xr./UT2gtpx8nK53Hnouhp1rORe8gh0tg4KxegQ0zMCPWJ0.7he",
+    "image": "https://avatars.dicebear.com/api/avataaars/ff8se.svg",
     "isAdmin": false
   }
 ]

@@ -3,6 +3,9 @@ import localStorageService from "./localStorage.service";
 
 const roomsEndpoint = "room/";
 
+const roomId = localStorageService.getRoomId();
+console.log(roomId);
+
 const roomsService = {
   get: async () => {
     const { data } = await httpService.get(roomsEndpoint);
@@ -10,10 +13,8 @@ const roomsService = {
     return data;
   },
   update: async (payload) => {
-    const { data } = await httpService.patch(
-      roomsEndpoint + localStorageService.getRoomId(),
-      payload
-    );
+    console.log(payload);
+    const { data } = await httpService.patch(roomsEndpoint + roomId, payload);
     console.log(data);
     return data;
   },

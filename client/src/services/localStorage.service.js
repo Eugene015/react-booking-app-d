@@ -51,6 +51,7 @@ const localStorageService = {
   getTokenExpiresDate,
   getUserId,
   setRoomId,
+  getRoomId,
   removeAuthData,
 };
 export default localStorageService;
