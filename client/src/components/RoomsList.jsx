@@ -4,11 +4,23 @@ import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { getRoomsList } from "../store/rooms";
 import { useLocation } from "react-router-dom";
+import { isAvailable } from "../utils/isAvailable";
+import { getDatesInRange } from "../utils/datesInRange";
 
 const RoomsList = () => {
   const { state } = useLocation();
   const rooms = useSelector(getRoomsList());
   console.log(state);
+  console.log(typeof rooms);
+  console.log(Array.isArray);
+
+  const allDates = getDatesInRange(
+    state.dates[0].startDate,
+    state.dates[0].endDate
+  );
+
+  const unavDates = isAvailable(allDates, rooms);
+  console.log(unavDates);
 
   return (
     <>

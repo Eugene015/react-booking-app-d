@@ -14,6 +14,7 @@ import localStorageService from "../services/localStorage.service";
 import { getCurrentUserData } from "../store/users";
 import { dayDifference } from "../utils/dayDiff";
 import { getDatesInRange } from "../utils/datesInRange";
+import { isAvailable } from "../utils/isAvailable";
 
 const RoomPage = () => {
   const { state } = useLocation();
@@ -51,6 +52,9 @@ const RoomPage = () => {
 
   const updatedRoom = { ...room, unavailableDates: allDates };
   console.log(updatedRoom);
+
+  const unavDates = isAvailable(allDates, room);
+  console.log(unavDates);
 
   const handleClick = async () => {
     if (!localStorageService.getAccessToken()) {

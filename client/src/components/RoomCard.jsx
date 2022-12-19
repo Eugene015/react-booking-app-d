@@ -16,6 +16,7 @@ const RoomCard = ({
   halfboard,
   price,
   searchData,
+  disabled,
 }) => {
   console.log(searchData);
   const history = useHistory();
