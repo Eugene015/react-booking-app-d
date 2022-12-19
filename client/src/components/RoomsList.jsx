@@ -11,8 +11,6 @@ const RoomsList = () => {
   const { state } = useLocation();
   const rooms = useSelector(getRoomsList());
   console.log(state);
-  console.log(typeof rooms);
-  console.log(Array.isArray);
 
   const allDates = getDatesInRange(
     state.dates[0].startDate,
