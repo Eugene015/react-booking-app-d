@@ -15,14 +15,12 @@ router.patch("/:roomId", async (req, res) => {
   try {
     const { roomId } = req.params;
 
-    if (userId === req.user._id) {
-      const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
-        new: true,
-      });
-      res.send(updatedUser);
-    } else {
-      res.status(401).json({ message: "Unauthorized" });
-    }
+    console.log("Req params room ID: ", req.params);
+
+    const updatedRoom = await Room.findByIdAndUpdate(roomId, req.body, {
+      new: true,
+    });
+    res.send(updatedRoom);
   } catch (e) {
     res.status(500).json({
       message: "На сервере произошла ошибка. Попробуйте позже",
