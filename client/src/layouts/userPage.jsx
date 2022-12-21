@@ -1,11 +1,14 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { format } from "date-fns";
+import { useSelector } from "react-redux";
+import { getSearchData } from "../store/searchData";
+import { useLocation } from "react-router-dom";
 
 const UserPage = () => {
-  const { state } = useLocation();
-  console.log(state);
+  const location = useLocation();
+  // const bookingMessage = location.state.message;
+  const state = useSelector(getSearchData());
 
   return (
     <>
@@ -15,7 +18,7 @@ const UserPage = () => {
 
         {state ? (
           <p className="mx-2 my-4 p-6 border border-green-500 rounded bg-green-100 max-w-[750px]">
-            {state.message}{" "}
+            {"bookingMessage"}{" "}
           </p>
         ) : (
           ""
@@ -59,26 +62,26 @@ const UserPage = () => {
                       className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
                     >
                       {state
-                        ? state.state.category.charAt(0).toUpperCase() +
-                          state.state.category.slice(1)
+                        ? state.category.charAt(0).toUpperCase() +
+                          state.category.slice(1)
                         : ""}
                     </th>
                     <td className="py-4 px-6">
                       {state
-                        ? format(state.state.dates[0].startDate, "dd/MM/yyyy")
+                        ? format(state.dates[0].startDate, "dd/MM/yyyy")
                         : ""}
                     </td>
                     <td className="py-4 px-6">
                       {state
-                        ? format(state.state.dates[0].endDate, "dd/MM/yyyy")
+                        ? format(state.dates[0].endDate, "dd/MM/yyyy")
                         : ""}
                     </td>
                     <td className="py-4 px-6">
-                      Adults {state ? state.state.options.adult : ""}/ Children{" "}
-                      {state ? state.state.options.children : ""}
+                      Adults {state ? state.options.adult : ""}/ Children{" "}
+                      {state ? state.options.children : ""}
                     </td>
                     <td className="py-4 px-6 text-orange-500">
-                      ${state ? state.totalPrice : ""}
+                      ${state ? "price" : ""}
                     </td>
                     <td className="py-4 px-6">
                       <a

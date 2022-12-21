@@ -8,13 +8,12 @@ import { signUp } from "../../store/users";
 const RegisterForm = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState({
+    name: "",
     email: "",
     password: "",
-    profession: "",
-    sex: "male",
-    name: "",
-    qualities: [],
+    phone: "",
     licence: false,
+    isAdmin: false,
   });
 
   const [errors, setErrors] = useState({});
@@ -26,14 +25,6 @@ const RegisterForm = () => {
     }));
   };
   const validatorConfig = {
-    email: {
-      isRequired: {
-        message: "Электронная почта обязательна для заполнения",
-      },
-      isEmail: {
-        message: "Email введен некорректно",
-      },
-    },
     name: {
       isRequired: {
         message: "Имя обязательно для заполнения",
@@ -41,6 +32,14 @@ const RegisterForm = () => {
       min: {
         message: "Имя должено состаять миниму из 3 символов",
         value: 3,
+      },
+    },
+    email: {
+      isRequired: {
+        message: "Электронная почта обязательна для заполнения",
+      },
+      isEmail: {
+        message: "Email введен некорректно",
       },
     },
     password: {
@@ -58,9 +57,9 @@ const RegisterForm = () => {
         value: 8,
       },
     },
-    profession: {
+    phone: {
       isRequired: {
-        message: "Обязательно выберите вашу профессию",
+        message: "Обязательно укажите номер телефона для связи",
       },
     },
     licence: {
@@ -82,13 +81,12 @@ const RegisterForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(e.target);
+    console.log("click");
     const isValid = validate();
     if (!isValid) return;
-    const newData = {
-      ...data,
-      qualities: data.qualities.map((q) => q.value),
-    };
-    dispatch(signUp(newData));
+
+    dispatch(signUp(data));
   };
 
   return (
@@ -121,22 +119,14 @@ const RegisterForm = () => {
           error={errors.password}
         />
 
-        <div>
-          <label
-            htmlFor="phone"
-            className="block msb-2 text-sm font-medium text-gray-900"
-          >
-            Phone number
-          </label>
-          <input
-            type="tel"
-            name="phone"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="+38063-111-22-33"
-            pattern="+[0-9]{3}-[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
-            required
-          />
-        </div>
+        <TextField
+          label="Phone"
+          type="text"
+          name="phone"
+          value={data.phone}
+          onChange={handleChange}
+          error={errors.phone}
+        />
 
         <CheckBoxField
           value={data.licence}

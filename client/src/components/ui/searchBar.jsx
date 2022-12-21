@@ -11,8 +11,11 @@ import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
+import { useDispatch } from "react-redux";
+import { addSearchData } from "../../store/searchData";
 
 const SearchBar = () => {
+  const dispatch = useDispatch();
   const [category, setCategory] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
@@ -40,7 +43,8 @@ const SearchBar = () => {
   };
 
   const handleSearch = (searchData) => {
-    history.push("/roomsPage", searchData);
+    dispatch(addSearchData(searchData));
+    history.push("/roomsPage");
   };
 
   return (

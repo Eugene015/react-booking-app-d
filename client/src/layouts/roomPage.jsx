@@ -15,9 +15,10 @@ import { getCurrentUserData } from "../store/users";
 import { dayDifference } from "../utils/dayDiff";
 import { getDatesInRange } from "../utils/datesInRange";
 import { isAvailable } from "../utils/isAvailable";
+import { getSearchData } from "../store/searchData";
 
 const RoomPage = () => {
-  const { state } = useLocation();
+  const state = useSelector(getSearchData());
   const history = useHistory();
   const { roomId } = useParams();
   const dispatch = useDispatch();
@@ -49,8 +50,15 @@ const RoomPage = () => {
   );
 
   console.log(allDates);
+  const changedUnavDates = room.unavailableDates.map((date) => {
+    return new Date(date).getTime();
+  });
 
-  const updatedRoom = { ...room, unavailableDates: allDates };
+  console.log(changedUnavDates);
+
+  const conbinedDates = [...changedUnavDates, ...allDates];
+
+  const updatedRoom = { ...room, unavailableDates: conbinedDates };
   console.log(updatedRoom);
 
   const unavDates = isAvailable(allDates, room);
@@ -60,14 +68,13 @@ const RoomPage = () => {
     if (!localStorageService.getAccessToken()) {
       history.push(`/login/login`);
     }
-
+    console.log(roomId);
     localStorageService.setRoomId(roomId);
     await dispatch(unavailableDatesAdd(updatedRoom));
     console.log(rooms);
     return history.push(`/users/${currentUser._id}`, {
       message: bookingMessage,
-      totalPrice,
-      state,
+      price: totalPrice,
     });
   };
 

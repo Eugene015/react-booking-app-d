@@ -10,10 +10,12 @@ const httpAuth = axios.create({
 });
 
 const authService = {
-  register: async ({ email, password }) => {
+  register: async ({ name, email, password, phone }) => {
     const { data } = await httpAuth.post(`signUp`, {
+      name,
       email,
       password,
+      phone,
       returnSecureToken: true,
     });
     return data;
