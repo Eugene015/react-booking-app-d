@@ -15,9 +15,10 @@ import { getCurrentUserData } from "../store/users";
 import { dayDifference } from "../utils/dayDiff";
 import { getDatesInRange } from "../utils/datesInRange";
 import { isAvailable } from "../utils/isAvailable";
+import { getSearchData } from "../store/searchData";
 
 const RoomPage = () => {
-  const { state } = useLocation();
+  const state = useSelector(getSearchData());
   const history = useHistory();
   const { roomId } = useParams();
   const dispatch = useDispatch();
@@ -73,8 +74,7 @@ const RoomPage = () => {
     console.log(rooms);
     return history.push(`/users/${currentUser._id}`, {
       message: bookingMessage,
-      totalPrice,
-      state,
+      price: totalPrice,
     });
   };
 

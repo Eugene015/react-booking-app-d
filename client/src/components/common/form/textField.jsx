@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import PropTypes from "prop-types";
 
 const TextField = ({ label, type, name, value, onChange, error }) => {
@@ -16,27 +17,27 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
   return (
     <div className="mb-4">
       <label htmlFor={name}> {label}</label>
-      <div className="input-group has-validation">
+      <div className="flex">
         <input
           type={showPassword ? "text" : type}
           id={name}
           name={name}
           value={value}
           onChange={handleChange}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:placeholder-gray-200 dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
 
         {type === "password" && (
-          <button
-            className="btn btn-outline-secondary"
-            type="button"
-            onClick={toggleShowPassword}
-          >
-            <i className={"bi bi-eye" + (showPassword ? "-slash" : "")}></i>
+          <button type="button" onClick={toggleShowPassword}>
+            {showPassword ? (
+              <EyeIcon className="h-6 w-6 text-blue-500" />
+            ) : (
+              <EyeSlashIcon className="h-6 w-6 text-blue-500" />
+            )}
           </button>
         )}
-        {error && <div className="invalid-feedback ">{error}</div>}
       </div>
+      {error && <div className="text-red-700">{error}</div>}
     </div>
   );
 };

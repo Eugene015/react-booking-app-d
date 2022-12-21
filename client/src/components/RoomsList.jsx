@@ -3,12 +3,11 @@ import RoomCard from "./RoomCard";
 import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { getRoomsList } from "../store/rooms";
-import { useLocation } from "react-router-dom";
-// import { isAvailable } from "../utils/isAvailable";
 import { getDatesInRange } from "../utils/datesInRange";
+import { getSearchData } from "../store/searchData";
 
 const RoomsList = () => {
-  const { state } = useLocation();
+  const state = useSelector(getSearchData());
   const rooms = useSelector(getRoomsList());
   console.log(state);
 
