@@ -29,7 +29,6 @@ const SearchBar = () => {
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
-    room: 1,
   });
   const history = useHistory();
 
@@ -53,9 +52,9 @@ const SearchBar = () => {
         <FontAwesomeIcon icon={faBed} className="headerIcon" />
         <select
           className="headerSearchInput"
-          defaultValue="standard"
           onChange={(e) => setCategory(e.target.value)}
         >
+          <option>Select category</option>
           <option value="standard">Standard</option>
           <option value="luxury">Luxury Suit</option>
           <option value="family">Family</option>
@@ -86,7 +85,7 @@ const SearchBar = () => {
         <span
           onClick={() => setOpenOptions(!openOptions)}
           className="headerSearchText"
-        >{`${options.adult} adult · ${options.children} children · ${options.room} room`}</span>
+        >{`${options.adult} adult · ${options.children} children`}</span>
         {openOptions && (
           <div className="options">
             <div className="optionItem">
@@ -122,25 +121,6 @@ const SearchBar = () => {
                 <button
                   className="optionCounterButton"
                   onClick={() => handleOption("children", "i")}
-                >
-                  +
-                </button>
-              </div>
-            </div>
-            <div className="optionItem">
-              <span className="optionText">Room</span>
-              <div className="optionCounter">
-                <button
-                  disabled={options.room <= 1}
-                  className="optionCounterButton"
-                  onClick={() => handleOption("room", "d")}
-                >
-                  -
-                </button>
-                <span className="optionCounterNumber">{options.room}</span>
-                <button
-                  className="optionCounterButton"
-                  onClick={() => handleOption("room", "i")}
                 >
                   +
                 </button>
