@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 
 const UserPage = () => {
   const location = useLocation();
-  // const bookingMessage = location.state.message;
+
   const state = useSelector(getSearchData());
 
   return (
@@ -18,7 +18,7 @@ const UserPage = () => {
 
         {state ? (
           <p className="mx-2 my-4 p-6 border border-green-500 rounded bg-green-100 max-w-[750px]">
-            {"bookingMessage"}{" "}
+            {"Reservation successfull message"}
           </p>
         ) : (
           ""
