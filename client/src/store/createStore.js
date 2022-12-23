@@ -1,4 +1,4 @@
-import commentsReducer from "./comments";
+import reservationReducer from "./reservation";
 import roomsReducer from "./rooms";
 import searchDataReducer from "./searchData";
 import usersReducer from "./users";
@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
   users: usersReducer,
   rooms: roomsReducer,
   search: searchDataReducer,
-  comments: commentsReducer,
+  reservation: reservationReducer,
 });
 
 export function createStore() {

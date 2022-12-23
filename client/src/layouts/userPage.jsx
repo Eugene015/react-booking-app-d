@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
-import { format } from "date-fns";
 import { useSelector } from "react-redux";
 import { getSearchData } from "../store/searchData";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
+import BookingTable from "../components/ui/bookingsTable";
+import {
+  getReservationsLoadingStatus,
+  loadReservationList,
+} from "../store/reservation";
+import { getCurrentUserData } from "../store/users";
 
 const UserPage = () => {
-  const location = useLocation();
-
+  // const location = useLocation();
+  const currentUser = useSelector(getCurrentUserData());
   const state = useSelector(getSearchData());
+  const isReservLoggedIn = useSelector(getReservationsLoadingStatus());
+  const userReservList = useSelector(loadReservationList(currentUser._id));
+  
 
   return (
     <>
@@ -18,7 +26,7 @@ const UserPage = () => {
 
         {state ? (
           <p className="mx-2 my-4 p-6 border border-green-500 rounded bg-green-100 max-w-[750px]">
-            {"Reservation successfull message"}
+            {"bookingMessage"}
           </p>
         ) : (
           ""
@@ -56,42 +64,11 @@ const UserPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white border-b">
-                    <th
-                      scope="row"
-                      className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
-                    >
-                      {state
-                        ? state.category.charAt(0).toUpperCase() +
-                          state.category.slice(1)
-                        : ""}
-                    </th>
-                    <td className="py-4 px-6">
-                      {state
-                        ? format(state.dates[0].startDate, "dd/MM/yyyy")
-                        : ""}
-                    </td>
-                    <td className="py-4 px-6">
-                      {state
-                        ? format(state.dates[0].endDate, "dd/MM/yyyy")
-                        : ""}
-                    </td>
-                    <td className="py-4 px-6">
-                      Adults {state ? state.options.adult : ""}/ Children{" "}
-                      {state ? state.options.children : ""}
-                    </td>
-                    <td className="py-4 px-6 text-orange-500">
-                      ${state ? "price" : ""}
-                    </td>
-                    <td className="py-4 px-6">
-                      <a
-                        href="#"
-                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                      >
-                        Delete
-                      </a>
-                    </td>
-                  </tr>
+                  {!isReservLoggedIn ? (
+                    <BookingTable state={state} />
+                  ) : (
+                    "Loading..."
+                  )}
                 </tbody>
               </table>
             </div>

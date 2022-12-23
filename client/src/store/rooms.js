@@ -77,7 +77,6 @@ export const getRoomById = (roomId) => (state) => {
   }
 };
 
-export const getIsLoggedInForRooms = () => (state) => state.rooms.isLoggedIn;
 export const getDataStatus = () => (state) => state.rooms.dataLoaded;
 export const getRoomsLoadingStatus = () => (state) => state.rooms.isLoading;
 
