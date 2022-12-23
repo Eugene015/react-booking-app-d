@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { getRoomById, getRoomsList, unavailableDatesAdd } from "../store/rooms";
 import { format } from "date-fns";
@@ -16,6 +16,7 @@ import { dayDifference } from "../utils/dayDiff";
 import { getDatesInRange } from "../utils/datesInRange";
 import { isAvailable } from "../utils/isAvailable";
 import { getSearchData } from "../store/searchData";
+import { createReservation } from "../store/reservation";
 
 const RoomPage = () => {
   const state = useSelector(getSearchData());
@@ -64,12 +65,24 @@ const RoomPage = () => {
   const unavDates = isAvailable(allDates, room);
   console.log(unavDates);
 
+  const reservationData = {
+    roomNumber: room.roomNumber,
+    category: room.category,
+    totalPrice: totalPrice,
+    halfBoard: room.halfBoard,
+    seaView: room.seaView,
+    dates: [
+      { startDate: state.dates[0].startDate, endDate: state.dates[0].endDate },
+    ],
+  };
+
   const handleClick = async () => {
     if (!localStorageService.getAccessToken()) {
       history.push(`/login/login`);
     }
     console.log(roomId);
     localStorageService.setRoomId(roomId);
+    await dispatch(createReservation(reservationData));
     await dispatch(unavailableDatesAdd(updatedRoom));
     console.log(rooms);
     return history.push(`/users/${currentUser._id}`, {
