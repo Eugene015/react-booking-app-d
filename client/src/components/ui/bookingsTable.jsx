@@ -1,39 +1,65 @@
-import React from "react";
 import { format } from "date-fns";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { removeReservation } from "../../store/reservation";
+import { getRoomById } from "../../store/rooms";
 
-const BookingTable = ({ state }) => {
-  console.log(state);
+const BookingTable = ({ reservationData, isAdmin }) => {
+  const dispatch = useDispatch();
+  console.log(reservationData);
+  const room = useSelector(getRoomById(reservationData.roomId));
+  console.log(room);
+
+  const handleDelete = (roomId) => {
+    dispatch(removeReservation(roomId));
+  };
   return (
     <>
-      <tr className="bg-white border-b">
-        <th
-          scope="row"
-          className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
-        >
-          {state
-            ? state.category.charAt(0).toUpperCase() + state.category.slice(1)
-            : ""}
-        </th>
-        <td className="py-4 px-6">
-          {state ? format(state.dates[0].startDate, "dd/MM/yyyy") : ""}
-        </td>
-        <td className="py-4 px-6">
-          {state ? format(state.dates[0].endDate, "dd/MM/yyyy") : ""}
-        </td>
-        <td className="py-4 px-6">
-          Adults {state ? state.options.adult : ""}/ Children{" "}
-          {state ? state.options.children : ""}
-        </td>
-        <td className="py-4 px-6 text-orange-500">${state ? "price" : ""}</td>
-        <td className="py-4 px-6">
-          <a
-            href="#"
-            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+      <tbody>
+        <tr className="bg-white">
+          {isAdmin ? (
+            <td className="py-4 px-6">{reservationData.guestName}</td>
+          ) : (
+            ""
+          )}
+          <td
+            scope="row"
+            className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap "
           >
-            Delete
-          </a>
-        </td>
-      </tr>
+            {reservationData.category.charAt(0).toUpperCase() +
+              reservationData.category.slice(1)}
+          </td>
+          <td className="py-4 px-6">{reservationData.roomNumber}</td>
+          <td className="py-4 px-6">
+            {format(
+              new Date(reservationData.dates[0].startDate).getTime(),
+              "dd/MM/yyyy"
+            )}
+          </td>
+          <td className="py-4 px-6">
+            {format(
+              new Date(reservationData.dates[0].endDate).getTime(),
+              "dd/MM/yyyy"
+            )}
+          </td>
+          <td className="py-4 px-6">
+            <p>Adults {reservationData.guests.adults}</p>
+            <p>Children {reservationData.guests.children}</p>
+          </td>
+          <td className="py-4 px-6 text-orange-500">
+            ${reservationData.totalPrice}
+          </td>
+          <td className="py-4 px-6">
+            <a
+              href="#"
+              className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+              onClick={() => handleDelete(reservationData._id)}
+            >
+              Delete
+            </a>
+          </td>
+        </tr>
+      </tbody>
     </>
   );
 };

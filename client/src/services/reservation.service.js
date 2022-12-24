@@ -6,8 +6,12 @@ const reservationService = {
     const { data } = await httpService.post(reservationEndpoint, payload);
     return data;
   },
-  getReservation: async (reservId) => {
-    const { data } = await httpService.get(reservationEndpoint + reservId);
+  getReservation: async (userId) => {
+    const { data } = await httpService.get(reservationEndpoint + userId);
+    return data;
+  },
+  getAllReservation: async () => {
+    const { data } = await httpService.get(reservationEndpoint);
     return data;
   },
   removeReservation: async (reservId) => {

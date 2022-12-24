@@ -42,10 +42,10 @@ const addReservationRequested = createAction(
   "reservation/addReservationRequested"
 );
 const removeReservationRequested = createAction(
-  "reservation/removeCommentRequested"
+  "reservation/removeReservationRequested"
 );
 
-export const loadReservationList = (userId) => async (dispatch) => {
+export const loadUserReservationList = (userId) => async (dispatch) => {
   dispatch(reservationRequested());
   try {
     const { content } = await reservationService.getReservation(userId);
@@ -54,9 +54,19 @@ export const loadReservationList = (userId) => async (dispatch) => {
     dispatch(reservationRequestFailed(error.message));
   }
 };
+
+export const loadAllReservationList = () => async (dispatch) => {
+  dispatch(reservationRequested());
+  try {
+    const { content } = await reservationService.getAllReservation();
+    dispatch(reservationReceived(content));
+  } catch (error) {
+    dispatch(reservationRequestFailed(error.message));
+  }
+};
+
 export const createReservation = (payload) => async (dispatch) => {
   dispatch(addReservationRequested());
-
   try {
     const { content } = await reservationService.createReservation(payload);
     dispatch(reservationCreated(content));
@@ -68,7 +78,7 @@ export const removeReservation = (reservId) => async (dispatch) => {
   dispatch(removeReservationRequested());
   try {
     const { content } = await reservationService.removeReservation(reservId);
-    if (content === null) {
+    if (!content) {
       dispatch(reservationRemoved(reservId));
     }
   } catch (error) {

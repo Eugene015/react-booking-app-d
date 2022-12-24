@@ -2,7 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { getRoomById, getRoomsList, unavailableDatesAdd } from "../store/rooms";
+import {
+  getRoomById,
+  getRoomsList,
+  unavailableDatesUpdated,
+} from "../store/rooms";
 import { format } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -26,13 +30,11 @@ const RoomPage = () => {
   const room = useSelector(getRoomById(roomId));
   const currentUser = useSelector(getCurrentUserData());
   const rooms = useSelector(getRoomsList());
-  console.log(room);
 
-  console.log(state);
   const startDate = format(state.dates[0].startDate, "dd/MM/yyyy");
   const endDate = format(state.dates[0].endDate, "dd/MM/yyyy");
 
-  console.log(startDate, endDate);
+  console.log(startDate);
   const bookingMessage =
     "Congrats! You have successfully booked your room. This room will not be available for other guests on your booking dates. You could manage your bookings on your profile page.";
 
@@ -67,6 +69,8 @@ const RoomPage = () => {
 
   const reservationData = {
     roomNumber: room.roomNumber,
+    roomId: room._id,
+    guestName: currentUser.name,
     category: room.category,
     totalPrice: totalPrice,
     halfBoard: room.halfBoard,
@@ -74,6 +78,7 @@ const RoomPage = () => {
     dates: [
       { startDate: state.dates[0].startDate, endDate: state.dates[0].endDate },
     ],
+    guests: { adults: state.options.adult, children: state.options.children },
   };
 
   const handleClick = async () => {
@@ -83,11 +88,10 @@ const RoomPage = () => {
     console.log(roomId);
     localStorageService.setRoomId(roomId);
     await dispatch(createReservation(reservationData));
-    await dispatch(unavailableDatesAdd(updatedRoom));
+    await dispatch(unavailableDatesUpdated(updatedRoom));
     console.log(rooms);
     return history.push(`/users/${currentUser._id}`, {
       message: bookingMessage,
-      price: totalPrice,
     });
   };
 
