@@ -6,7 +6,6 @@ const roomsEndpoint = "room/";
 const roomsService = {
   get: async () => {
     const { data } = await httpService.get(roomsEndpoint);
-    console.log(data);
     return data;
   },
   update: async (payload) => {
@@ -15,7 +14,7 @@ const roomsService = {
       roomsEndpoint + localStorageService.getRoomId(),
       payload
     );
-    console.log(data);
+
     return data;
   },
 };

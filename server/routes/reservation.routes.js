@@ -7,8 +7,21 @@ const router = express.Router({ mergeParams: true });
 
 router.get("/", auth, async (req, res) => {
   try {
-    const resList = await Reservation.find();
-    console.log(resList);
+    const allResList = await Reservation.find();
+    res.send(allResList);
+  } catch (e) {
+    res.status(500).json({
+      message: "На сервере произошла ошибка. Попробуйте позже",
+    });
+  }
+});
+
+router.get("/:userId", auth, async (req, res) => {
+  try {
+    const { userId } = req.params;
+    console.log(userId);
+    const resList = await Reservation.find({ userId: userId });
+
     res.send(resList);
   } catch (e) {
     res.status(500).json({

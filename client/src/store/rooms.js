@@ -25,14 +25,14 @@ const roomsSlice = createSlice({
       state.error = action.payload;
       state.isLoading = false;
     },
-    roomsUnavDaysAdded: (state, action) => {
+    roomsUnavDaysUpdated: (state, action) => {
       const index = state.entities.findIndex(
         (room) => room._id === action.payload._id
       );
       console.log(action.payload);
       state.entities[index] = { ...action.payload };
     },
-    roomsUnavDaysAddedFiled: (state, action) => {
+    roomsUnavDaysAddedFailed: (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
     },
@@ -44,8 +44,8 @@ const {
   roomsRequested,
   roomsReceived,
   roomsRequestFiled,
-  roomsUnavDaysAdded,
-  roomsUnavDaysAddedFiled,
+  roomsUnavDaysUpdated,
+  roomsUnavDaysAddedFailed,
 } = actions;
 
 export const loadRoomsList = () => async (dispatch) => {
@@ -59,14 +59,14 @@ export const loadRoomsList = () => async (dispatch) => {
   }
 };
 
-export const unavailableDatesAdd = (payload) => async (dispatch) => {
+export const unavailableDatesUpdated = (payload) => async (dispatch) => {
   try {
     console.log(payload);
     const { content } = await roomsService.update(payload);
     console.log(content);
-    dispatch(roomsUnavDaysAdded(payload));
+    dispatch(roomsUnavDaysUpdated(payload));
   } catch (error) {
-    dispatch(roomsUnavDaysAddedFiled(error.message));
+    dispatch(roomsUnavDaysAddedFailed(error.message));
   }
 };
 

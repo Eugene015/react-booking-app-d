@@ -6,6 +6,14 @@ const schema = new Schema(
       type: Number,
       required: true,
     },
+    roomId: {
+      type: String,
+      required: true,
+    },
+    guestName: {
+      type: String,
+      required: true,
+    },
     category: {
       type: String,
       required: true,
@@ -24,6 +32,7 @@ const schema = new Schema(
       default: false,
     },
     dates: [],
+    guests: {},
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   {
