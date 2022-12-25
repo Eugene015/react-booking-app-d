@@ -15,10 +15,9 @@ import { getIsLoggedIn } from "../store/users";
 import NavProfile from "./ui/navProfile";
 
 const Navbar = () => {
+  const isLoggedIn = useSelector(getIsLoggedIn());
   const [nav, setNav] = useState(false);
   const [logo, setLogo] = useState(false);
-
-  const isLoggedIn = useSelector(getIsLoggedIn());
 
   const handleNav = () => {
     setNav(!nav);
@@ -30,26 +29,19 @@ const Navbar = () => {
       <div className="flex w-full justify-between items-center h-20 px-4 absolute z-10 text-white bg-slate-600 bg-opacity-50">
         <div>
           <Link to="/">
-            <h1 onClick={handleNav} className={logo ? "hidden" : "block"}>
+            <h1 className={logo ? "hidden" : "block"}>
               MEDITERRANIAN<span className="font-extralight">hotel</span>
             </h1>
           </Link>
         </div>
-        <ul className="hidden md:flex">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
 
-          <li>Our Numbers</li>
-
-          <li>Contacts</li>
-        </ul>
         <div className="hidden md:flex lg:flex sm:flex">
           {isLoggedIn ? (
             <NavProfile />
           ) : (
             <Link to="/login/login">
-              <BsPerson size={22} /> Sign In/Sign Up
+              <BsPerson size={20} />
+              <p>Sign In</p>
             </Link>
           )}
         </div>

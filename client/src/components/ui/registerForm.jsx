@@ -27,45 +27,44 @@ const RegisterForm = () => {
   const validatorConfig = {
     name: {
       isRequired: {
-        message: "Имя обязательно для заполнения",
+        message: "Name is required",
       },
       min: {
-        message: "Имя должено состаять миниму из 3 символов",
+        message: "Name must be minimum of three characters",
         value: 3,
       },
     },
     email: {
       isRequired: {
-        message: "Электронная почта обязательна для заполнения",
+        message: "E-mail is required",
       },
       isEmail: {
-        message: "Email введен некорректно",
+        message: "E-mail is incorrect",
       },
     },
     password: {
       isRequired: {
-        message: "Пароль обязательна для заполнения",
+        message: "Password is required",
       },
       isCapitalSymbol: {
-        message: "Пароль должен содержать хотя бы одну заглавную букву",
+        message: "Password must have minimum one capital case letter",
       },
       isContainDigit: {
-        message: "Пароль должен содержать хотя бы одно число",
+        message: "Password must have minimum one number",
       },
       min: {
-        message: "Пароль должен состаять миниму из 8 символов",
+        message: "Password must have minimum 8 carachters",
         value: 8,
       },
     },
     phone: {
       isRequired: {
-        message: "Обязательно укажите номер телефона для связи",
+        message: "Phone number is required",
       },
     },
     licence: {
       isRequired: {
-        message:
-          "Вы не можете использовать наш сервис без подтреврждения лицензионного соглашения",
+        message: "You can not use our service with no lisence accepting",
       },
     },
   };
@@ -81,11 +80,8 @@ const RegisterForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
-    console.log("click");
     const isValid = validate();
     if (!isValid) return;
-
     dispatch(signUp(data));
   };
 
@@ -96,14 +92,14 @@ const RegisterForm = () => {
         onSubmit={handleSubmit}
       >
         <TextField
-          label="Имя"
+          label="Name"
           name="name"
           value={data.name}
           onChange={handleChange}
           error={errors.name}
         />
         <TextField
-          label="Электронная почта"
+          label="E-mail"
           name="email"
           value={data.email}
           onChange={handleChange}
@@ -111,7 +107,7 @@ const RegisterForm = () => {
         />
 
         <TextField
-          label="Пароль"
+          label="Password"
           type="password"
           name="password"
           value={data.password}
@@ -120,7 +116,7 @@ const RegisterForm = () => {
         />
 
         <TextField
-          label="Phone"
+          label="Phone number"
           type="text"
           name="phone"
           value={data.phone}
@@ -134,7 +130,7 @@ const RegisterForm = () => {
           name="licence"
           error={errors.licence}
         >
-          Подтвердить <a>лицензионное соглашение</a>
+          Accept <a>lisence agreement</a>
         </CheckBoxField>
         <button
           type="submit"

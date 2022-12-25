@@ -23,13 +23,7 @@ const Footer = () => {
             <FaInstagram className="icon" />
           </div>
         </div>
-        <div className="flex justify-between">
-          <ul className="lg:flex">
-            <li>Home</li>
-            <li>Our Numbers</li>
-            <li>Contacts</li>
-          </ul>
-        </div>
+        <div className="flex justify-between"></div>
       </div>
     </div>
   );

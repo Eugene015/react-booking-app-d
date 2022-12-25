@@ -121,7 +121,6 @@ export const loadUsersList = () => async (dispatch) => {
   dispatch(usersRequested());
   try {
     const { content } = await userService.get();
-    console.log("users", content);
     dispatch(usersReceived(content));
   } catch (error) {
     dispatch(usersRequestFiled(error.message));

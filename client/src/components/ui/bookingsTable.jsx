@@ -6,9 +6,8 @@ import { getRoomById } from "../../store/rooms";
 
 const BookingTable = ({ reservationData, isAdmin }) => {
   const dispatch = useDispatch();
-  console.log(reservationData);
+
   const room = useSelector(getRoomById(reservationData.roomId));
-  console.log(room);
 
   const handleDelete = (roomId) => {
     dispatch(removeReservation(roomId));

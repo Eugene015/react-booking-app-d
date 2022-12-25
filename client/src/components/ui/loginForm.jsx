@@ -14,7 +14,7 @@ const LoginForm = () => {
   });
   const loginError = useSelector(getAuthErrors());
   const history = useHistory();
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
 
   const handleChange = (target) => {
@@ -27,12 +27,12 @@ const LoginForm = () => {
   const validatorConfog = {
     email: {
       isRequired: {
-        message: "Электронная почта обязательна для заполнения",
+        message: "E-mail is required",
       },
     },
     password: {
       isRequired: {
-        message: "Пароль обязателен для заполнения",
+        message: "Password is required",
       },
     },
   };
@@ -54,47 +54,49 @@ const LoginForm = () => {
       ? history.location.state.from.pathname
       : "/";
 
-    dispath(login({ payload: data, redirect }));
+    dispatch(login({ payload: data, redirect }));
   };
   return (
-    <div className="w-full max-w-xs m-auto">
-      <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          label="Электронная почта"
-          name="email"
-          value={data.email}
-          onChange={handleChange}
-          error={errors.email}
-        />
-        <TextField
-          label="Пароль"
-          type="password"
-          name="password"
-          value={data.password}
-          onChange={handleChange}
-          error={errors.password}
-        />
-        <CheckBoxField
-          value={data.stayOn}
-          onChange={handleChange}
-          name="stayOn"
+    <>
+      <div className="w-full max-w-xs m-auto">
+        <form
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          onSubmit={handleSubmit}
         >
-          Оставаться в системе
-        </CheckBoxField>
-        {loginError && <p className="text-danger">{loginError}</p>}
+          <TextField
+            label="E-mail"
+            name="email"
+            value={data.email}
+            onChange={handleChange}
+            error={errors.email}
+          />
+          <TextField
+            label="Password"
+            type="password"
+            name="password"
+            value={data.password}
+            onChange={handleChange}
+            error={errors.password}
+          />
+          <CheckBoxField
+            value={data.stayOn}
+            onChange={handleChange}
+            name="stayOn"
+          >
+            Stay in system
+          </CheckBoxField>
+          {loginError && <p className="text-danger">{loginError}</p>}
 
-        <button
-          type="submit"
-          disabled={!isValid}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Login
-        </button>
-      </form>
-    </div>
+          <button
+            type="submit"
+            disabled={!isValid}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

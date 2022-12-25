@@ -36,7 +36,6 @@ http.interceptors.request.use(
     } else {
       if (isExpired) {
         const data = await authService.refresh();
-        console.log(data);
         localStorageService.setTokens(data);
       }
       const accessToken = localStorageService.getAccessToken();
@@ -76,7 +75,6 @@ http.interceptors.response.use(
       error.response.status < 500;
 
     if (!expectedErrors) {
-      console.log(error);
       toast.error("Something was wrong. Try it later");
     }
     return Promise.reject(error);

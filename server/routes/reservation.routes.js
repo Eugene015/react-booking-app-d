@@ -19,7 +19,6 @@ router.get("/", auth, async (req, res) => {
 router.get("/:userId", auth, async (req, res) => {
   try {
     const { userId } = req.params;
-    console.log(userId);
     const resList = await Reservation.find({ userId: userId });
 
     res.send(resList);
@@ -30,7 +29,6 @@ router.get("/:userId", auth, async (req, res) => {
   }
 });
 router.post("/", auth, async (req, res) => {
-  console.log("UserID Myyyy: ", req.user._id);
   try {
     const newReservation = await Reservation.create({
       ...req.body,

@@ -117,7 +117,8 @@
   h3 {
     @apply text-xl;
   }
-  button {
+  button,
+  button[type="submit"] {
     @apply p-3 border bg-gradient-to-r from-[var(--primary-dark)] to-[var(--primary-light)] text-white rounded-md;
   }
   .icon {

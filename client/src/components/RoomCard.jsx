@@ -6,6 +6,7 @@ import {
   faWater,
   faSlash,
 } from "@fortawesome/free-solid-svg-icons";
+import localStorageService from "../services/localStorage.service";
 
 const RoomCard = ({
   _id,
@@ -18,10 +19,13 @@ const RoomCard = ({
   searchData,
   disabled,
 }) => {
-  console.log(searchData);
+  const isLoggedIn = localStorageService.getAccessToken();
   const history = useHistory();
   const handleClick = (_id) => {
-    history.push(`/roomsPage/${_id}`, searchData);
+    if (!isLoggedIn) {
+      return history.push(`/login/login`);
+    }
+    return history.push(`/roomsPage/${_id}`, searchData);
   };
 
   return (
@@ -40,15 +44,11 @@ const RoomCard = ({
         </p>
         <p>
           <span className="font-bold">Seaview</span>:{" "}
-          {seaview ? <FontAwesomeIcon icon={faWater} /> : ""}
+          {seaview ? <FontAwesomeIcon icon={faWater} /> : "-"}
         </p>
         <p>
           <span className="font-bold">Halfboard</span>:{" "}
-          {halfboard ? (
-            <FontAwesomeIcon icon={faUtensils} />
-          ) : (
-            <FontAwesomeIcon icon={faSlash} />
-          )}
+          {halfboard ? <FontAwesomeIcon icon={faUtensils} /> : "-"}
         </p>
         <p>
           <span className="text-lg font-bold pt-6">Price</span>: {price}
