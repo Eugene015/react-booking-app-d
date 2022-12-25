@@ -23,7 +23,6 @@ const RoomsProvider = ({ children }) => {
   async function getRooms() {
     try {
       const { content } = await roomsService.get();
-      console.log(content);
       setRooms(content);
       setLoading(false);
     } catch (error) {
@@ -35,7 +34,6 @@ const RoomsProvider = ({ children }) => {
     setError(message);
     setLoading(false);
   }
-  console.log(rooms);
 
   return (
     <RoomsContext.Provider value={{ rooms }}>

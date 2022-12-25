@@ -9,7 +9,6 @@ const roomsService = {
     return data;
   },
   update: async (payload) => {
-    console.log(payload);
     const { data } = await httpService.patch(
       roomsEndpoint + localStorageService.getRoomId(),
       payload

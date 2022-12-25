@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import LoginForm from "../components/ui/loginForm";
 import RegisterForm from "../components/ui/registerForm";
 
 const Login = () => {
   const { type } = useParams();
 
-  console.log(type);
   const [formType, setFormType] = useState(
     type === "register" ? type : "login"
   );
@@ -53,6 +53,13 @@ const Login = () => {
               </p>
             </>
           )}
+          <p className="mb-4 text-center">
+            {" "}
+            Back to{" "}
+            <Link to="/" className="text-blue-500 hover:underline">
+              Homepage
+            </Link>
+          </p>
         </div>
       </div>
     </div>

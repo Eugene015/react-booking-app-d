@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 const RoomsList = () => {
   const state = useSelector(getSearchData());
   const rooms = useSelector(getRoomsList());
-  console.log(state);
 
   const allDates = getDatesInRange(
     state.dates[0].startDate,
@@ -21,7 +20,6 @@ const RoomsList = () => {
     const isFound = roomData.unavailableDates.some((date) =>
       alldates.includes(new Date(date).getTime())
     );
-    console.log(isFound);
 
     return !isFound;
   };
@@ -33,8 +31,6 @@ const RoomsList = () => {
       isAvailable(allDates, room)
     );
   });
-
-  console.log(searchFilteredRooms);
 
   return (
     <>

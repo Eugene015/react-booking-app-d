@@ -14,9 +14,6 @@ router.get("/", async (req, res) => {
 router.patch("/:roomId", async (req, res) => {
   try {
     const { roomId } = req.params;
-
-    console.log("Req params room ID: ", req.params);
-
     const updatedRoom = await Room.findByIdAndUpdate(roomId, req.body, {
       new: true,
     });

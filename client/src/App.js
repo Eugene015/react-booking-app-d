@@ -5,15 +5,15 @@ import MainPage from "./layouts/mainPage";
 import Login from "./layouts/login";
 import LogOut from "./layouts/logOut";
 import AppLoader from "./components/hoc/appLoader";
-import UserPage from "./layouts/userPage";
 import RoomsListPage from "./layouts/roomsListPage";
 import RoomPage from "./layouts/roomPage";
+import Users from "./layouts/users";
 
 function App() {
   return (
     <AppLoader>
       <Switch>
-        <ProtectedRoute path="/users/:userId?/:edit?" component={UserPage} />
+        <ProtectedRoute path="/users/:userId?/:edit?" component={Users} />
         <Route path="/login/:type?" component={Login} />
         <Route path="/logout" component={LogOut} />
         <Route path="/roomsPage/:roomId" component={RoomPage} />
