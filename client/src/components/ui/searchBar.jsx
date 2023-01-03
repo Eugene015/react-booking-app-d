@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   faBed,
@@ -46,12 +45,16 @@ const SearchBar = () => {
     history.push("/roomsPage");
   };
 
+  const handleDatesCloseOpen = () => {
+    setOpenDate(!openDate);
+  };
+
   return (
-    <div className="headerSearch m-auto">
-      <div className="headerSearchItem">
-        <FontAwesomeIcon icon={faBed} className="headerIcon" />
+    <div className="grid grid-cols-2 gap-4 md:flex items-center justify-between pr-[5px] pl-[15px] rounded-lg lg:w-full 2xl:w-full max-w-[796px] absolute bottom-[5%] md:bottom-[150px] md:left-[18%] md:h-[60px] bg-white border-[3px] border-gray-300 p-4">
+      <div className="md:flex items-center gap-[10px] text-gray-400">
+        <FontAwesomeIcon icon={faBed} className="text-gray-400" />
         <select
-          className="headerSearchInput"
+          className="border-0 outline-0"
           onChange={(e) => setCategory(e.target.value)}
         >
           <option>Select category</option>
@@ -60,11 +63,11 @@ const SearchBar = () => {
           <option value="family">Family</option>
         </select>
       </div>
-      <div className="headerSearchItem">
-        <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
+      <div className="md:flex items-center gap-[10px] text-gray-400">
+        <FontAwesomeIcon icon={faCalendarDays} className="text-gray-400" />
         <span
-          onClick={() => setOpenDate(!openDate)}
-          className="headerSearchText"
+          onClick={handleDatesCloseOpen}
+          className="text-gray-400 cursor-pointer"
         >{`${format(dates[0].startDate, "dd/MM/yyyy")} to ${format(
           dates[0].endDate,
           "dd/MM/yyyy"
@@ -75,51 +78,53 @@ const SearchBar = () => {
             onChange={(item) => setDates([item.selection])}
             moveRangeOnFirstSelection={false}
             ranges={dates}
-            className="date"
+            className="fixed bottom-[0px] left-[0px] right-[0px] md:absolute md:bottom-auto md:left-auto md:right-auto md:top-[50px] z-2"
             minDate={new Date()}
+            weekStartsOn={1}
+            rangeColors={["#5651e5"]}
           />
         )}
       </div>
-      <div className="headerSearchItem">
-        <FontAwesomeIcon icon={faPerson} className="headerIcon" />
+      <div className="md:flex items-center gap-[10px] text-gray-400">
+        <FontAwesomeIcon icon={faPerson} className="text-gray-400" />
         <span
           onClick={() => setOpenOptions(!openOptions)}
-          className="headerSearchText"
+          className="text-gray-400 cursor-pointer"
         >{`${options.adult} adult · ${options.children} children`}</span>
         {openOptions && (
-          <div className="options">
-            <div className="optionItem">
+          <div className="fixed bottom-[0px] left-[0px] right-[0px] md:absolute md:top-[50px] md:bottom-auto md:left-auto md:right-auto bg-white z-2 text-gray-400 border shadow-lg">
+            <div className="flex justify-between m-[10px] w-[200px]">
               <span className="optionText">Adult</span>
-              <div className="optionCounter">
+              <div className="flex items-center gap-[10px] text-sm text-black">
                 <button
                   disabled={options.adult <= 1}
-                  className="optionCounterButton"
+                  className="w-[30px] h-[30px] border text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
                   onClick={() => handleOption("adult", "d")}
                 >
                   -
                 </button>
                 <span className="optionCounterNumber">{options.adult}</span>
                 <button
-                  className="optionCounterButton"
+                  className="w-[30px] h-[30px] border text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
                   onClick={() => handleOption("adult", "i")}
                 >
                   +
                 </button>
               </div>
             </div>
-            <div className="optionItem">
+            <div className="flex justify-between m-[10px] w-[200px]">
               <span className="optionText">Children</span>
-              <div className="optionCounter">
+              <div className="flex items-center gap-[10px] text-sm text-black">
                 <button
                   disabled={options.children <= 0}
-                  className="optionCounterButton"
+                  className="w-[30px] h-[30px] border text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
                   onClick={() => handleOption("children", "d")}
                 >
                   -
                 </button>
                 <span className="optionCounterNumber">{options.children}</span>
                 <button
-                  className="optionCounterButton"
+                  className="w-[30px] h-[30px] border  text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
                   onClick={() => handleOption("children", "i")}
                 >
                   +
@@ -129,12 +134,9 @@ const SearchBar = () => {
           </div>
         )}
       </div>
-      <div className="headerSearchItem">
-        <button
-          className="headerBtn"
-          onClick={() => handleSearch({ category, dates, options })}
-        >
-          Check availiability
+      <div className="md:flex items-center gap-[10px] text-gray-400">
+        <button onClick={() => handleSearch({ category, dates, options })}>
+          Search
         </button>
       </div>
     </div>
