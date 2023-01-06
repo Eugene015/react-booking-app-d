@@ -66,7 +66,7 @@ const RoomPage = () => {
 
   const handleClick = async () => {
     if (!localStorageService.getAccessToken()) {
-      history.push(`/login/login`);
+      history.push(`/login`);
     }
     localStorageService.setRoomId(roomId);
     await dispatch(createReservation(reservationData));
@@ -81,12 +81,12 @@ const RoomPage = () => {
       {!room ? (
         <h1>Loading...</h1>
       ) : (
-        <div className="w-full h-screen relative">
-          <div className="absolute top-0 w-full h-full flex flex-row space-between">
+        <div className="w-full h-screen">
+          <div className="w-full h-full flex flex-row space-between">
             <div className="p-10 pt-20 min-w-[400px]">
               <h1 className="py-8">
                 {state.category.charAt(0).toUpperCase() +
-                  state.category.slice(1)}{" "}
+                  state.category.slice(1)}
                 room page
               </h1>
               <div className="bg-gray-400/10 p-6">
@@ -136,7 +136,10 @@ const RoomPage = () => {
                   <p></p>
                 </div>
 
-                <button className="mt-6 mb-2" onClick={() => handleClick()}>
+                <button
+                  className="main mt-6 mb-2"
+                  onClick={() => handleClick()}
+                >
                   Book Now
                 </button>
               </div>

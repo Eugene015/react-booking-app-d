@@ -35,18 +35,19 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="hidden md:flex lg:flex sm:flex">
+        <div className="hidden md:flex ">
           {isLoggedIn ? (
             <NavProfile />
           ) : (
-            <Link to="/login/login">
+            <>
               <BsPerson size={20} />
-              <p>Sign In</p>
-            </Link>
+              <Link to="/login" className="hover:text-blue-500">
+                <p className="ml-2">Sign In</p>
+              </Link>
+            </>
           )}
         </div>
 
-        {/* Hamburger */}
         <div onClick={handleNav} className="md:hidden z-10">
           {nav ? (
             <AiOutlineClose className="text-black" size={20} />
@@ -55,7 +56,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile menu dropdown */}
         <div
           onClick={handleNav}
           className={
@@ -68,13 +68,15 @@ const Navbar = () => {
             <h1>
               MEDITERRANIAN<span className="font-extralight">hotel</span>
             </h1>
-            <li className="border-b">Home</li>
-            <li className="border-b">Our Numbers</li>
-            <li className="border-b">Contacts</li>
-            <div className="flex flex-col">
-              <button className="my-6">
-                {isLoggedIn ? <NavProfile /> : <Link to="/login">Login</Link>}
-              </button>
+
+            <div className="p-8">
+              {isLoggedIn ? (
+                <NavProfile />
+              ) : (
+                <Link to="/login">
+                  <button className="main my-6 mx-auto">Login</button>
+                </Link>
+              )}
             </div>
             <div className="flex justify-between my-6">
               <FaFacebook className="icon" />
