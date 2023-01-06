@@ -87,7 +87,7 @@ export const login =
     dispatch(authRequested());
     try {
       const data = await authService.login({ email, password });
-      dispatch(authRequestSuccess({ userId: data.localId }));
+      dispatch(authRequestSuccess({ userId: data.userId }));
       localStorageService.setTokens(data);
       history.push(redirect);
     } catch (error) {

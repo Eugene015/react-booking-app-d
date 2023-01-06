@@ -4,20 +4,23 @@ import SearchBar from "./ui/searchBar";
 
 const Hero = () => {
   return (
-    <div className="w-full h-screen relative">
-      <img
-        className="w-full h-full object-cover"
-        src={mhotel_hero}
-        alt="mediterranian hotel"
-      />
-      <div className="absolute w-full h-full top-0 left-0 bg-gray-900/70"></div>
-      <div className="absolute top-0 w-full h-full flex flex-col justify-center text-center text-white p-4">
-        <h1 className="font-normal">
-          <span className="text-orange-300">5 Star</span> hotel on Meditteranian
-          seashore
-        </h1>
-        <h2 className="font-normal">Top 3 in Liguria</h2>
-        <SearchBar />
+    <div className="w-full h-screen">
+      <div
+        className="w-full h-full mx-auto flex justify-center items-center"
+        style={{
+          backgroundSize: "cover",
+          backgroundImage: `url(${mhotel_hero})`,
+          boxShadow: "inset 0 0 0 2000px rgba(0, 0, 0, 0.65)",
+        }}
+      >
+        <div className="w-full h-full flex flex-col justify-center items-center text-center text-white pt-20 px-8 md:p-4">
+          <h1 className="font-normal">
+            <span className="text-orange-300">5 Star</span> hotel on
+            Meditteranian seashore
+          </h1>
+          <h2 className="font-normal mb-6">Top 3 in Liguria</h2>
+          <SearchBar />
+        </div>
       </div>
     </div>
   );

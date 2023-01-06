@@ -50,7 +50,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4 md:flex items-center justify-between pr-[5px] pl-[15px] rounded-lg lg:w-full 2xl:w-full max-w-[796px] absolute bottom-[5%] md:bottom-[150px] md:left-[18%] md:h-[60px] bg-white border-[3px] border-gray-300 p-4">
+    <div className="grid grid-cols-2 gap-4 md:flex items-center justify-between pr-[5px] pl-[15px] rounded-lg lg:w-full 2xl:w-full max-w-[796px] md:h-[60px] bg-white border-[3px] border-gray-300 p-4 relative">
       <div className="md:flex items-center gap-[10px] text-gray-400">
         <FontAwesomeIcon icon={faBed} className="text-gray-400" />
         <select
@@ -73,16 +73,25 @@ const SearchBar = () => {
           "dd/MM/yyyy"
         )}`}</span>
         {openDate && (
-          <DateRange
-            editableDateInputs={true}
-            onChange={(item) => setDates([item.selection])}
-            moveRangeOnFirstSelection={false}
-            ranges={dates}
-            className="fixed bottom-[0px] left-[0px] right-[0px] md:absolute md:bottom-auto md:left-auto md:right-auto md:top-[50px] z-2"
-            minDate={new Date()}
-            weekStartsOn={1}
-            rangeColors={["#5651e5"]}
-          />
+          <div className="fixed bottom-[0px] left-[0px] right-[0px] md:absolute md:bottom-auto md:left-auto md:right-auto md:top-[50px] z-2 bg-white">
+            <DateRange
+              editableDateInputs={true}
+              onChange={(item) => setDates([item.selection])}
+              moveRangeOnFirstSelection={false}
+              ranges={dates}
+              minDate={new Date()}
+              weekStartsOn={1}
+              rangeColors={["#5651e5"]}
+            />
+            <div className="bg-white">
+              <button
+                className="main m-4 md:hidden"
+                onClick={handleDatesCloseOpen}
+              >
+                Done
+              </button>
+            </div>
+          </div>
         )}
       </div>
       <div className="md:flex items-center gap-[10px] text-gray-400">
@@ -93,49 +102,64 @@ const SearchBar = () => {
         >{`${options.adult} adult · ${options.children} children`}</span>
         {openOptions && (
           <div className="fixed bottom-[0px] left-[0px] right-[0px] md:absolute md:top-[50px] md:bottom-auto md:left-auto md:right-auto bg-white z-2 text-gray-400 border shadow-lg">
-            <div className="flex justify-between m-[10px] w-[200px]">
-              <span className="optionText">Adult</span>
-              <div className="flex items-center gap-[10px] text-sm text-black">
-                <button
-                  disabled={options.adult <= 1}
-                  className="w-[30px] h-[30px] border text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
-                  onClick={() => handleOption("adult", "d")}
-                >
-                  -
-                </button>
-                <span className="optionCounterNumber">{options.adult}</span>
-                <button
-                  className="w-[30px] h-[30px] border text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
-                  onClick={() => handleOption("adult", "i")}
-                >
-                  +
-                </button>
+            <div className="flex flex-col justify-center items-center my-4">
+              <div className="flex justify-between m-[10px] w-[200px]">
+                <span className="optionText">Adult</span>
+                <div className="flex items-center gap-[10px] text-sm text-black">
+                  <button
+                    disabled={options.adult <= 1}
+                    className="w-[30px] h-[30px] border text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
+                    onClick={() => handleOption("adult", "d")}
+                  >
+                    -
+                  </button>
+                  <span className="optionCounterNumber">{options.adult}</span>
+                  <button
+                    className="w-[30px] h-[30px] border text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
+                    onClick={() => handleOption("adult", "i")}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div className="flex justify-between m-[10px] w-[200px]">
+                <span className="optionText">Children</span>
+                <div className="flex items-center gap-[10px] text-sm text-black">
+                  <button
+                    disabled={options.children <= 0}
+                    className="w-[30px] h-[30px] border text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
+                    onClick={() => handleOption("children", "d")}
+                  >
+                    -
+                  </button>
+                  <span className="optionCounterNumber">
+                    {options.children}
+                  </span>
+                  <button
+                    className="w-[30px] h-[30px] border  text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
+                    onClick={() => handleOption("children", "i")}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </div>
-            <div className="flex justify-between m-[10px] w-[200px]">
-              <span className="optionText">Children</span>
-              <div className="flex items-center gap-[10px] text-sm text-black">
-                <button
-                  disabled={options.children <= 0}
-                  className="w-[30px] h-[30px] border text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
-                  onClick={() => handleOption("children", "d")}
-                >
-                  -
-                </button>
-                <span className="optionCounterNumber">{options.children}</span>
-                <button
-                  className="w-[30px] h-[30px] border  text-gray-500 cursor-pointer bg-white disabled:cursor-not-allowed"
-                  onClick={() => handleOption("children", "i")}
-                >
-                  +
-                </button>
-              </div>
+            <div className="bg-white">
+              <button
+                className="main m-4 md:hidden"
+                onClick={() => setOpenOptions(!openOptions)}
+              >
+                Done
+              </button>
             </div>
           </div>
         )}
       </div>
       <div className="md:flex items-center gap-[10px] text-gray-400">
-        <button onClick={() => handleSearch({ category, dates, options })}>
+        <button
+          className="main"
+          onClick={() => handleSearch({ category, dates, options })}
+        >
           Search
         </button>
       </div>

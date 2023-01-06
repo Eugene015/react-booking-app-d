@@ -59,7 +59,7 @@ const EditUserPage = () => {
 
   return (
     <div className="mt-5 max-w-[50%] m-auto">
-      <button className="mt-6 mb-2" onClick={handleClickToPrevious}>
+      <button className="main mt-6 mb-2" onClick={handleClickToPrevious}>
         Back
       </button>
       <p className="pb-6 font-bold">
@@ -90,7 +90,11 @@ const EditUserPage = () => {
               error={errors.phone}
             />
 
-            <button type="submit" disabled={!isValid} className="mt-6 mb-2">
+            <button
+              type="submit"
+              disabled={!isValid}
+              className="main mt-6 mb-2"
+            >
               Update
             </button>
           </form>

@@ -1,11 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import {
-  faUtensils,
-  faWater,
-  faSlash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUtensils, faWater } from "@fortawesome/free-solid-svg-icons";
 import localStorageService from "../services/localStorage.service";
 
 const RoomCard = ({
@@ -23,7 +19,7 @@ const RoomCard = ({
   const history = useHistory();
   const handleClick = (_id) => {
     if (!isLoggedIn) {
-      return history.push(`/login/login`);
+      return history.push(`/login`);
     }
     return history.push(`/roomsPage/${_id}`, searchData);
   };
@@ -53,7 +49,7 @@ const RoomCard = ({
         <p>
           <span className="text-lg font-bold pt-6">Price</span>: {price}
         </p>
-        <button className="mt-6 mb-2" onClick={() => handleClick(_id)}>
+        <button className="main mt-6 mb-2" onClick={() => handleClick(_id)}>
           Look and Book
         </button>
       </div>
