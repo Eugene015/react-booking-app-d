@@ -7,6 +7,7 @@ import {
   loadUsersList,
 } from "../../store/users";
 import { getRoomsLoadingStatus, loadRoomsList } from "../../store/rooms";
+import { ThreeDots } from "react-loader-spinner";
 
 const AppLoader = ({ children }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,19 @@ const AppLoader = ({ children }) => {
     }
   }, [isLoggedIn]);
 
-  if (usersStatusLoading && roomsLoadingStatus) return "loading";
+  if (usersStatusLoading && roomsLoadingStatus)
+    return (
+      <ThreeDots
+        height="80"
+        width="80"
+        radius="9"
+        color="#5651e5"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClassName=""
+        visible={true}
+      />
+    );
   return children;
 };
 

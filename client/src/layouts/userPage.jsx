@@ -80,7 +80,7 @@ const UserPage = () => {
                       ""
                     )}
                   </div>
-                  <div className=" shadow-md sm:rounded-lg">
+                  <div className=" shadow-md sm:rounded-lg mr-8">
                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                       <thead className="text-xs text-gray-700 uppercase   dark:text-gray-400">
                         <tr>
@@ -135,7 +135,7 @@ const UserPage = () => {
                     You have no reservations for now
                   </h3>
                   <Link to="/">
-                    <button className="headerBtn my-6">
+                    <button className="main headerBtn my-6">
                       Check for availiable rooms
                     </button>
                   </Link>

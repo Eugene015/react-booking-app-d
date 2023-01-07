@@ -2,24 +2,17 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import {
-  getRoomById,
-  getRoomsList,
-  unavailableDatesUpdated,
-} from "../store/rooms";
+import { getRoomById, unavailableDatesUpdated } from "../store/rooms";
 import { format } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUtensils,
-  faWater,
-  faSlash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUtensils, faWater } from "@fortawesome/free-solid-svg-icons";
 import localStorageService from "../services/localStorage.service";
 import { getCurrentUserData } from "../store/users";
 import { dayDifference } from "../utils/dayDiff";
 import { getDatesInRange } from "../utils/datesInRange";
 import { getSearchData } from "../store/searchData";
 import { createReservation } from "../store/reservation";
+import Footer from "../components/Footer";
 
 const RoomPage = () => {
   const state = useSelector(getSearchData());
@@ -71,7 +64,7 @@ const RoomPage = () => {
     localStorageService.setRoomId(roomId);
     await dispatch(createReservation(reservationData));
     await dispatch(unavailableDatesUpdated(updatedRoom));
-    return history.push(`/users/${currentUser._id}`);
+    return history.replace(`/users/${currentUser._id}`);
   };
 
   return (
@@ -81,15 +74,16 @@ const RoomPage = () => {
       {!room ? (
         <h1>Loading...</h1>
       ) : (
-        <div className="w-full h-screen">
-          <div className="w-full h-full flex flex-row space-between">
-            <div className="p-10 pt-20 min-w-[400px]">
-              <h1 className="py-8">
-                {state.category.charAt(0).toUpperCase() +
-                  state.category.slice(1)}
-                room page
-              </h1>
+        <div className="w-full">
+          <div className="">
+            <div className="grid grid-flow-dense md:grid-flow-col pt-[80px] justify-center ">
               <div className="bg-gray-400/10 p-6">
+                <h1 className="pt-8 pb-2">
+                  {state.category.charAt(0).toUpperCase() +
+                    state.category.slice(1)}{" "}
+                  room page
+                </h1>
+                <h3 className="pb-6">Booking summary</h3>
                 <p>
                   <span className="font-bold">Category</span>: {room.category}
                 </p>
@@ -143,11 +137,13 @@ const RoomPage = () => {
                   Book Now
                 </button>
               </div>
-            </div>
-            <div className="max-w-[70%] pt-56">
-              <img src={room.imgUrl} alt="Hotel Room" />
+
+              <div>
+                <img src={room.imgUrl} alt="Hotel Room" className="h-full" />
+              </div>
             </div>
           </div>
+          <Footer />
         </div>
       )}
     </>
