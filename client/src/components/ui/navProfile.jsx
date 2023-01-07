@@ -1,17 +1,29 @@
 import React, { useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCurrentUserData } from "../../store/users";
 const NavProfile = () => {
   const currentUser = useSelector(getCurrentUserData());
-  console.log(currentUser);
   const [isOpen, setOpen] = useState(false);
 
   const toggleMenu = () => {
     setOpen((prevState) => !prevState);
   };
 
-  if (!currentUser) return "loading";
+  if (!currentUser)
+    return (
+      <ThreeDots
+        height="80"
+        width="80"
+        radius="9"
+        color="#5651e5"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClassName=""
+        visible={true}
+      />
+    );
   return (
     <>
       <div className="flex flex-col md:flex-row justify-center items-center">
