@@ -130,10 +130,7 @@ const RoomPage = () => {
                   <p></p>
                 </div>
 
-                <button
-                  className="main mt-6 mb-2"
-                  onClick={() => handleClick()}
-                >
+                <button className="main mt-6 mb-2" onClick={handleClick}>
                   Book Now
                 </button>
               </div>
@@ -143,6 +140,7 @@ const RoomPage = () => {
               </div>
             </div>
           </div>
+
           <Footer />
         </div>
       )}

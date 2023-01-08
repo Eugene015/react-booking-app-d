@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex w-full justify-between items-center h-20 px-4 absolute z-10 text-white bg-slate-600 bg-opacity-50">
+      <div className="flex w-full justify-between items-center h-20 px-4 absolute z-2 text-white bg-slate-600 bg-opacity-50">
         <div>
           <Link to="/">
             <h1 className={logo ? "hidden" : "block"}>

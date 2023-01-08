@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import BookingTable from "../components/ui/bookingsTable";
@@ -9,11 +9,13 @@ import {
 } from "../store/reservation";
 import { getCurrentUserData, getIsLoggedIn } from "../store/users";
 import { Link } from "react-router-dom";
+import Modal from "../components/common/modal";
 
 const UserPage = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(getCurrentUserData());
   const isLoggedIn = useSelector(getIsLoggedIn());
+  const [modal, setModal] = useState(true);
 
   useEffect(() => {
     if (currentUser.isAdmin) {
@@ -28,6 +30,7 @@ const UserPage = () => {
   return (
     <>
       <Navbar />
+      {modal && <Modal setModal={setModal} />}
       <div className="pt-24 pl-8">
         <h1 className="ml-2 mt-4">User Page with Bookings</h1>
 
@@ -80,7 +83,7 @@ const UserPage = () => {
                       ""
                     )}
                   </div>
-                  <div className=" shadow-md sm:rounded-lg mr-8">
+                  <div className=" shadow-md sm:rounded-lg mx-8">
                     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                       <thead className="text-xs text-gray-700 uppercase   dark:text-gray-400">
                         <tr>
