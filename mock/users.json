@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "639df4a74f23335df779c4f3",
+    "name": "Bob Brown",
+    "email": "a123@gmail.com",
+    "password": "$2a$12$H7Xr./UT2gtpx8nK53Hnouhp1rORe8gh0tg4KxegQ0zMCPWJ0.7he",
+    "image": "https://avatars.dicebear.com/api/avataaars/ff8se.svg",
+    "phone": "+380638554121",
+    "isAdmin": true
+  },
+  {
+    "_id": "63a76d65ebf0ddd1f28d8c08",
+    "name": "Alex Green",
+    "email": "a1234@gmail.com",
+    "password": "$2a$12$V9CCIutGuNYxuynb61xhLuwJ/QnBSJslK.rYUrA49axSFv.6MjoAi",
+    "image": "https://avatars.dicebear.com/api/avataaars/mymuu.svg",
+    "phone": "+380638554120",
+    "isAdmin": false
+  }
+]
