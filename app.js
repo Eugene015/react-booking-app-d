@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use("/api", routes);
 
-const PORT = config.get("port") ?? 8080;
+const PORT = config.get("port") ?? 9000;
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.resolve(__dirname, "client", "build")));
   app.get("*", (req, res) => {
@@ -31,7 +31,7 @@ async function start() {
     await mongoose.connect(config.get("mongoUri"));
     console.log(chalk.green(`MongoDB for booking app connected!`));
 
-    app.listen(PORT, () => {
+    app.listen(process.env.PORT || 9000, () => {
       console.log(chalk.green(`Server has been started on port ${PORT}`));
     });
   } catch (e) {
